@@ -1,41 +1,31 @@
-# The Odin Project JavaScript Library
+# JavaScript "Library" Project
+This project is a simple JavaScript library project developed as part of The Odin Project curriculum. It allows users to add, display, and manage a collection of books.
 
-This project is a basic JavaScript library developed as part of The Odin Project curriculum. It aims to provide a collection of commonly used functions and utilities for JavaScript developers.
+**Features**
+- Add new books to the library.
+- Display books in a table or card format.
+- Remove books from the library.
+- Toggle the read status of each book.
 
-## Installation
+**Installation**
+To use this project, clone the repository and open the index.html file in your browser.
 
-To use this library in your project, simply download the `odin-library.js` file and include it in your HTML file using a script tag:
+**Usage**
+- Add a Book: Click the "NEW BOOK" button to open a form where you can input the book's details (author, title, number of pages, read status).
+- Display Books: The books will be displayed on the page in a table or card format.
+- Remove a Book: Each book display will have a "Remove" button to delete the book from the library.
+- Toggle Read Status: Each book display will have a button to change its read status.
 
-```html
-<script src="path/to/odin-library.js"></script>
-```
+**Code Overview**
+- Book Constructor
+- Library Array
+- Add Book to Library
+- Display Books
+- Remove Book
+- Toggle Read Status
 
-## Usage
+**Contributing**
+Feel free to fork this project and submit pull requests. For major changes, please open an issue first to discuss what you would like to change.
 
-Once the library is included in your project, you can start using its functions by calling them directly. Here's an example:
-
-```javascript
-// Example usage of the Odin Library
-const result = OdinLibrary.add(2, 3);
-console.log(result); // Output: 5
-```
-
-## Available Functions
-
-The Odin Library provides the following functions:
-
-- `add(a, b)`: Returns the sum of two numbers.
-- `subtract(a, b)`: Returns the difference between two numbers.
-- `multiply(a, b)`: Returns the product of two numbers.
-- `divide(a, b)`: Returns the quotient of two numbers.
-- `capitalize(string)`: Returns the input string with the first letter capitalized.
-
-For detailed documentation and examples of each function, please refer to the [API documentation](api.md).
-
-## Contributing
-
-Contributions to the Odin Library are welcome! If you have any bug fixes, improvements, or new features to add, please submit a pull request.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
+**License**
+This project is licensed under the MIT License.
