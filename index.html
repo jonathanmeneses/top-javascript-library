@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="header">
+        <button class="show-books btn" id="toggleBooksButton">Show Books</button>
+        <h1>Library of Jonathan</h1>
+        <button class="add-book btn" id="openDialogButton">Add Book</button>
+
+    </div>
+
+    <dialog id="bookDialog">
+        <h2>New Book</h2>
+        <form method="dialog" id="bookForm">
+            <label for="bookTitle">Title:</label>
+            <input type="text" name="title" id="bookTitle" required>
+
+            <label for="bookAuthor">Author:</label>
+            <input type="text" name="author" id="bookAuthor" required>
+
+            <label for="bookPages">Pages:</label>
+            <input type="number" name="pages" id="bookPages" required>
+
+            <label for="bookRead">Read:</label>
+            <input type="checkbox" name="read" id="bookRead">
+
+            <div class=dialog-buttons>
+                <button type="submitDialogButton">Create</button>
+                <button type="button" id="closeDialogButton">Close</button>
+            </div>
+        </form>
+    </dialog>
+
+    <div id="books" class="hidden">
+        <h1>Books!</h1>
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Length</th>
+                    <th>Read</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+    <script src="exercise.js"></script>
+</body>
+
+</html>
