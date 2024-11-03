@@ -18,7 +18,9 @@
 
     </div>
 
-    <dialog id="bookDialog">
+    <div class="overlay" id="overlay"></div>
+
+    <div class="sidebar" id="sidebar">
         <h2>New Book</h2>
         <form method="dialog" id="bookForm">
             <label for="bookTitle">Title:</label>
@@ -33,12 +35,12 @@
             <label for="bookRead">Read:</label>
             <input type="checkbox" name="read" id="bookRead">
 
-            <div class=dialog-buttons>
-                <button type="submitDialogButton">Create</button>
+            <div class=form-buttons>
+                <button type="submit">Create</button>
                 <button type="button" id="closeDialogButton">Close</button>
             </div>
         </form>
-    </dialog>
+    </div>
 
     <div id="books" class="hidden">
         <h1>Books!</h1>

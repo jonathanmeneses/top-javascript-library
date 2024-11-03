@@ -46,8 +46,6 @@ class Library {
             authorCell.textContent = book.author;
             pagesCell.textContent = book.pages;
 
-            readCell.className = 'read-cell'; // Ensure class is added correctly
-
             let toggleButton = document.createElement('button');
             toggleButton.textContent = book.read ? 'Read' : 'Not Read';
             toggleButton.setAttribute('data-index', index);
@@ -106,12 +104,16 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     openDialogButton.addEventListener('click', function () {
-        bookDialog.showModal();
+        document.getElementById('sidebar').classList.add('active');
+        document.getElementById('overlay').classList.add('active');
     });
 
     closeDialogButton.addEventListener('click', function () {
-        bookDialog.close();
+        document.getElementById('sidebar').classList.remove('active');
+        document.getElementById('overlay').classList.remove('active');
     });
+
+
 
     bookForm.addEventListener('submit', function (event) {
         event.preventDefault();
@@ -122,7 +124,8 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('bookRead').checked
         );
         myLibrary.addBook(newBook);
-        bookDialog.close();
+        document.getElementById('sidebar').classList.remove('active');
+        document.getElementById('overlay').classList.remove('active');
         bookForm.reset();
     });
 });
