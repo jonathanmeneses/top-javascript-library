@@ -9,54 +9,96 @@ class Book {
     info() {
         return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
     }
+
+    toggleRead() {
+        this.read = !this.read
+    }
 }
 
-const myLibrary = [];
+class Library {
+    constructor() {
+        this.books = [];
+    }
+
+    addBook(book) {
+        this.books.push(book);
+        this.displayBooks()
+    }
+
+    removeBook(index) {
+        this.books.splice(index, 1);
+        this.displayBooks();
+    }
+
+    displayBooks() {
+        const tbodyRef = document.getElementById('books').getElementsByTagName('tbody')[0];
+        tbodyRef.innerHTML = '';
+
+        this.books.forEach((book, index) => {
+            let newRow = tbodyRef.insertRow();
+            let titleCell = newRow.insertCell(0);
+            let authorCell = newRow.insertCell(1);
+            let pagesCell = newRow.insertCell(2);
+            let readCell = newRow.insertCell(3);
+            let actionCell = newRow.insertCell(4);
+
+            titleCell.textContent = book.title;
+            authorCell.textContent = book.author;
+            pagesCell.textContent = book.pages;
+
+            readCell.className = 'read-cell'; // Ensure class is added correctly
+
+            let toggleButton = document.createElement('button');
+            toggleButton.textContent = book.read ? 'Read' : 'Not Read';
+            toggleButton.setAttribute('data-index', index);
+            toggleButton.classList.add('read-toggle');
+            toggleButton.addEventListener('click', () => {
+                book.toggleRead();
+                this.displayBooks();
+            });
+
+            let removeButton = document.createElement('button');
+            removeButton.textContent = 'Remove';
+            removeButton.setAttribute('data-index', index);
+            removeButton.classList.add('remove-book');
+            removeButton.addEventListener('click', () => {
+                this.removeBook(index);
+                this.displayBooks();
+            });
+
+            readCell.appendChild(toggleButton);
+            actionCell.appendChild(removeButton); // Append remove button to the new cell
+        });
+    }
+}
+
+const myLibrary = new Library();
 
 // Adding books to the library
 const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false);
 const theGreatGatsby = new Book('The Great Gatsby', 'F Scott Fitzgerald', 495, true);
 
-myLibrary.push(theHobbit, theGreatGatsby);
-
-// Function to add a book to the table
-function addBookToTable(book, index) {
-    const tbodyRef = document.getElementById('books').getElementsByTagName('tbody')[0];
-    let newRow = tbodyRef.insertRow();
-    let titleCell = newRow.insertCell(0);
-    let authorCell = newRow.insertCell(1);
-    let pagesCell = newRow.insertCell(2);
-    let readCell = newRow.insertCell(3);
-    let toggleButton = document.createElement('button');
-
-
-    titleCell.textContent = book.title;
-    authorCell.textContent = book.author;
-    pagesCell.textContent = book.pages;
-    toggleButton.textContent = book.read ? 'Read' : 'Not Read';
-    toggleButton.setAttribute('data-index', index);
-    toggleButton.classList.add('read-toggle')
-    readCell.appendChild(toggleButton);
-
-
-
-}
+myLibrary.addBook(theGreatGatsby);
+myLibrary.addBook(theHobbit);
 
 // Function to initialize the book table
 function initializeLibrary() {
-    myLibrary.forEach((book, index) => addBookToTable(book, index));
+    myLibrary.displayBooks();
 }
+
+initializeLibrary();
 
 // Event listeners and dialog handling
 document.addEventListener('DOMContentLoaded', function () {
-    initializeLibrary();
-
     const toggleButton = document.getElementById('toggleBooksButton');
     const books = document.getElementById('books');
     const bookDialog = document.getElementById('bookDialog');
     const bookForm = document.getElementById('bookForm');
     const closeDialogButton = document.getElementById('closeDialogButton');
     const openDialogButton = document.getElementById('openDialogButton');
+
+    // Ensure the toggle button has the 'btn' class
+    toggleButton.classList.add('btn');
 
     toggleButton.addEventListener('click', function () {
         books.classList.toggle('hidden');
@@ -71,19 +113,6 @@ document.addEventListener('DOMContentLoaded', function () {
         bookDialog.close();
     });
 
-    document.querySelectorAll('.read-toggle').forEach(button => {
-        button.addEventListener('click', function () {
-
-            button.textContent = button.textContent === 'Read' ? 'Not Read' : 'Read';
-
-            const bookIndex = button.getAttribute('data-index');
-            myLibrary[bookIndex].read = !myLibrary[bookIndex].read;
-        })
-    })
-
-
-
-
     bookForm.addEventListener('submit', function (event) {
         event.preventDefault();
         const newBook = new Book(
@@ -92,9 +121,10 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('bookPages').value,
             document.getElementById('bookRead').checked
         );
-        myLibrary.push(newBook);
-        addBookToTable(newBook);
+        myLibrary.addBook(newBook);
         bookDialog.close();
         bookForm.reset();
     });
 });
+
+
